@@ -1,0 +1,32 @@
+<template>
+  <div class="<%= componentName %>-formatter">
+    {{ data }}
+  </div>
+</template>
+
+<script>
+  export default {
+    name: '<%= componentName %>-formatter',
+    props: {
+      data: {
+        type: <%= dataTypeU %>,
+        default: <%- dataTypeDefaultValueU %>
+      },
+      label: {
+        type: String,
+        default: ''
+      },
+      formProps: {
+        type: Object,
+        default: () => {
+          return { }
+        }
+      }
+    },
+  }
+
+</script>
+
+<style lang="less">
+  .<%=componentName %>-formatter {}
+</style>

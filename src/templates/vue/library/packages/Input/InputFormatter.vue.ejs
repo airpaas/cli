@@ -1,0 +1,35 @@
+<template>
+  <div class="air-input-formatter">
+    {{ data }}
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'air-input-formatter',
+    props: {
+      data: {
+        type: String,
+        default: () => []
+      },
+      label: {
+        type: String,
+        default: ''
+      },
+      formProps: {
+        type: Object,
+        default: () => {
+          return {
+            columns: []
+          }
+        }
+      }
+    },
+  }
+
+</script>
+
+<style lang="less">
+  .air-input-formatter {}
+
+</style>

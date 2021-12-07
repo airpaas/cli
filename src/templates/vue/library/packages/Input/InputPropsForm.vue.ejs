@@ -1,0 +1,21 @@
+<template>
+  <el-form class="air-input-props-form" :model="data" ref="form">
+    {{data}}
+  </el-form>
+</template>
+
+<script>
+  import formCtrlMixin from '../mixins/formCtrl'
+  import customVModel from '../mixins/customVModel'
+  import propsFormMixin from '../mixins/propsFrom'
+  export default {
+    name: 'air-input-props-form',
+    mixins: [formCtrlMixin, customVModel, propsFormMixin]
+  }
+
+</script>
+
+<style lang="less">
+  .air-input-props-form {}
+
+</style>

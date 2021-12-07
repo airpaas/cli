@@ -1,0 +1,16 @@
+export default {
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
+  computed: {
+    data: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        this.$emit('input', val)
+      },
+    },
+  },
+}

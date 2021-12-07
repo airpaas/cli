@@ -1,0 +1,73 @@
+{
+  "name": "@airpaas/cli",
+  "description": "AirPaaS 开发者工具",
+  "version": "0.1.0",
+  "author": "AirPaaS",
+  "bin": {
+    "air": "./bin/run"
+  },
+  "bugs": "https://github.com/airpaas/cli/issues",
+  "dependencies": {
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^3",
+    "async-validator": "^4.0.7",
+    "axios": "^0.24.0",
+    "chalk": "4.1.2",
+    "change-case": "^4.1.2",
+    "dayjs": "^1.10.7",
+    "ejs": "^3.1.6",
+    "enquirer": "^2.3.6",
+    "execa": "^5.0.0",
+    "fs-jetpack": "^4.3.0",
+    "glob": "^7.2.0",
+    "lodash": "^4.17.21",
+    "lowdb": "^3.0.0",
+    "minio": "^7.0.25",
+    "nanoid": "^3.1.30",
+    "node-json-db": "^1.4.1",
+    "progress": "^2.0.3",
+    "qs": "^6.10.1",
+    "semver": "^7.3.5"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1",
+    "@oclif/test": "^1",
+    "chai": "^4",
+    "eslint": "^5.13",
+    "eslint-config-oclif": "^3.1",
+    "globby": "^10",
+    "mocha": "^5",
+    "nyc": "^14"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/airpaas/cli",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "air",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "airpaas/cli",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint .",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}

@@ -1,0 +1,12 @@
+import Input from './Input.vue'
+import InputFormatter from './InputFormatter.vue'
+import InputPropsForm from './InputPropsForm.vue'
+import meta from './meta'
+
+Input.install = (Vue) => {
+  Vue.component(Input.name, Input)
+  Vue.component(InputPropsForm.name, InputPropsForm)
+  Vue.component(InputFormatter.name, InputFormatter)
+}
+Input.meta = meta
+export default Input

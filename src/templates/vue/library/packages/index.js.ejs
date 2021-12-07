@@ -1,0 +1,22 @@
+import Input from './Input'
+
+const components = [Input]
+
+const metas = components
+.filter((item) => {
+return Boolean(item)
+})
+.map((item) => {
+return item.meta
+})
+
+const install = (Vue) => {
+if (install.installed) return
+components.forEach((co) => co.install(Vue))
+}
+
+export default {
+install,
+Input,
+metas,
+}

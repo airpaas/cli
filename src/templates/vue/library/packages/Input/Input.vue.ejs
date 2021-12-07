@@ -1,0 +1,30 @@
+<template>
+  <div class="air-input">
+    <el-input
+      v-model="data"
+      :disabled="disabled"
+      :readonly="readonly"
+      v-bind="$attrs" />
+  </div>
+</template>
+
+<script>
+  import formCtrlMixin from '../mixins/formCtrl'
+  import customVModel from '../mixins/customVModel'
+  export default {
+    props: {
+      value: {
+        type: String,
+        default: ''
+      }
+    },
+    name: 'air-input',
+    mixins: [formCtrlMixin, customVModel],
+  }
+
+</script>
+
+<style lang="less">
+  .air-input {}
+
+</style>

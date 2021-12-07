@@ -1,0 +1,11 @@
+export default {
+  methods: {
+    validate(elFormRefName = 'form') {
+      const formRef = this.$refs[elFormRefName]
+      if (formRef) {
+        return formRef.validate()
+      }
+      return Promise.resolve()
+    },
+  },
+}

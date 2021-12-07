@@ -1,0 +1,28 @@
+<% components.forEach(name =>{ %>
+  import <%= name %> from './<%= name %>'
+<% }) %>
+
+const components = [
+<% components.forEach(name =>{ %>
+  <%= name %>,
+<% }) %>
+]
+
+const metas = components.filter((item) => {
+  return Boolean(item)
+}).map((item) => {
+  return item.meta
+})
+
+const install = (Vue) => {
+if (install.installed) return
+  components.forEach((co) => co.install(Vue))
+}
+
+export default {
+  install,
+  <% components.forEach(name =>{ %>
+  <%= name %>,
+  <% }) %>
+  metas,
+}

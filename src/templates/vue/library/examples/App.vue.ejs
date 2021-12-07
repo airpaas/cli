@@ -1,0 +1,151 @@
+<template>
+  <el-container class="main">
+    <el-aside width="200px" class="main-side">
+      <el-menu>
+        <el-menu-item
+          v-for="meta in metas"
+          @click="changeMeta(meta)"
+          :key="meta.component"
+        >
+          {{ meta.label }}
+        </el-menu-item>
+      </el-menu>
+    </el-aside>
+    <el-main class="main-content">
+      <template v-if="curMeta">
+        <splitpanes class="wrap default-theme">
+          <pane>
+            <div class="pane-content">
+              <el-card>
+                <h3 slot="header">表单中展示</h3>
+                <el-button @click="$refs.form.resetFields()">重置</el-button>
+                <el-form ref="form" :model="formValue">
+                  <el-form-item prop="value" label="测试字段">
+                    <component
+                      v-model="formValue.value"
+                      :is="curMeta.component"
+                      v-bind="compProps"
+                    ></component>
+                  </el-form-item>
+                </el-form>
+              </el-card>
+              <el-card>
+                <h3 slot="header">列表中的展示</h3>
+                <el-table :data="[{ id: 1, value: formValue.value }]">
+                  <el-table-column label="测试字段" prop="value">
+                    <template slot-scope="{ row }">
+                      <component
+                        :data="row.value"
+                        label="测试字段"
+                        :formProps="compProps"
+                        v-if="curMeta.tableFormatter"
+                        :is="curMeta.tableFormatter"
+                      ></component>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </el-card>
+            </div>
+          </pane>
+          <pane>
+            <splitpanes horizontal>
+              <pane>
+                <div class="pane-content">
+                  <el-card>
+                    <h3 slot="header">组件属性配置</h3>
+                    <component
+                      :is="curMeta.propsForm"
+                      v-model="compProps"
+                    ></component>
+                  </el-card>
+                </div>
+              </pane>
+              <pane>
+                <div class="pane-content">
+                  <json-viewer
+                    :value="compProps"
+                    :expand-depth="5"
+                    copyable
+                    sort
+                  ></json-viewer>
+                </div>
+              </pane>
+            </splitpanes>
+          </pane>
+        </splitpanes>
+      </template>
+      <el-empty v-else description="请在左侧选择组件"></el-empty>
+    </el-main>
+  </el-container>
+</template>
+
+<script>
+import GaodaoLib from '../packages'
+import _cloneDeep from 'lodash/cloneDeep'
+export default {
+  name: 'App',
+  components: {
+
+  },
+  data() {
+    return {
+      metas: GaodaoLib.metas,
+      curMeta: null,
+      formValue: {
+        value: null
+      },
+      compProps: {}
+    }
+  },
+  mounted() {
+    this.changeMeta(GaodaoLib.metas[0])
+  },
+  methods: {
+    changeMeta(data) {
+      this.curMeta = data
+      this.formValue.value = data.defaultValue
+      this.compProps = _cloneDeep(data.props || {})
+    }
+  }
+}
+</script>
+
+<style lang="less">
+body,
+html,
+#app {
+  width: 100%;
+  height: 100%;
+}
+.main {
+  width: 100%;
+  height: 100%;
+  &-side {
+    // border-right: 1px solid #eee;
+  }
+  &-content {
+    height: 100%;
+    padding: 0;
+    .splitpanes {
+      background-color: #e3e3e3;
+    }
+    .splitpanes__pane {
+      background-color: #e3e3e3 !important;
+    }
+    .pane-content {
+      padding: 20px;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      .el-card {
+        margin-bottom: 10px;
+      }
+    }
+    .splitpanes__splitter {
+      background-color: #eee !important;
+    }
+  }
+}
+</style>

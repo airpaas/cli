@@ -1,0 +1,26 @@
+<template>
+  <div class="<%= componentName %>">
+    {{data}}
+  </div>
+</template>
+
+<script>
+  import formCtrlMixin from '../mixins/formCtrl'
+  import customVModel from '../mixins/customVModel'
+  export default {
+    props: {
+      value: {
+        type: <%= dataTypeU %> ,
+        default: <%- dataTypeDefaultValueU %>
+      }
+    },
+    name: '<%= componentName %>',
+    mixins: [formCtrlMixin, customVModel],
+  }
+
+</script>
+
+<style lang="less">
+  .<%= componentName %> {}
+
+</style>

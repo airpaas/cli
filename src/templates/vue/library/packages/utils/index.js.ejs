@@ -1,0 +1,37 @@
+export const genId = () => {
+  return Math.random().toString().replace('.', '')
+}
+
+export function getFunableValue(value, ...args) {
+  if (value && typeof value === 'function') {
+    return value(...args)
+  }
+  return value
+}
+
+export function optionsWrap(options) {
+  const getOption = (value) => {
+    const option = options.find((item) => {
+      return item.value === value
+    })
+    return option
+  }
+  return {
+    getOption,
+    get(value, key) {
+      const option = getOption(value)
+      return option ? option[key] : ''
+    },
+    options,
+    getLabel(value) {
+      const option = getOption(value)
+      return option ? option.label : ''
+    },
+    getValue(label) {
+      const option = options.find((item) => {
+        return item.label === label
+      })
+      return option ? option.value : null
+    },
+  }
+}

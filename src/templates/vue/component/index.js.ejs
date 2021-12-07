@@ -1,0 +1,12 @@
+import <%= name %> from './<%= name %>.vue'
+import <%= name %>Formatter from './<%= name %>Formatter.vue'
+import <%= name %>PropsForm from './<%= name %>PropsForm.vue'
+import meta from './meta'
+
+<%= name %>.install = (Vue) => {
+  Vue.component(<%= name %>.name , <%= name %>)
+  Vue.component(<%= name %>PropsForm.name , <%= name %>PropsForm)
+  Vue.component(<%= name %>Formatter.name , <%= name %>Formatter)
+}
+<%= name %>.meta = meta
+export default <%= name %>
