@@ -1,0 +1,39 @@
+import { Checkbox, Form, FormProps, Input, Radio, Switch } from 'antd';
+import React, { memo, useCallback, useEffect } from 'react';
+
+import { <%= name %>PropsFormProps } from './interface';
+import { safeCallFunction } from '../utils';
+
+const <%= name %>PropsForm = ({ value, onChange }: <%= name %>PropsFormProps) => {
+  const [form] = Form.useForm();
+  const changeHandle: FormProps['onValuesChange'] = useCallback(
+    (_, values) => {
+      safeCallFunction(onChange, [
+        {
+          ...value,
+          ...values,
+        },
+      ]);
+    },
+    [onChange, value],
+  );
+  useEffect(() => {
+    form.setFieldsValue(value);
+  }, []);
+  return (
+    <Form
+      className="<%= prefix %>-<%= componentName %>-props-form"
+      layout="vertical"
+      onValuesChange={changeHandle}
+      form={form}
+    >
+      {/* enter your code */}
+    </Form>
+  );
+};
+
+<%= name %>PropsForm.defaultProps = {
+  value: {},
+};
+
+export default memo(<%= name %>PropsForm);

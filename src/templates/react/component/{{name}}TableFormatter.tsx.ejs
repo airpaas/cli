@@ -1,0 +1,9 @@
+import React, { memo } from 'react';
+
+import { <%= name %>TableFormatterProps } from './interface';
+
+const <%= name %>TableFormatter = ({ data }: <%= name %>TableFormatterProps) => {
+  return <div className="<%= prefix %>-<%= componentName %>-table-formatter">{data || '暂无数据'}</div>;
+};
+
+export default memo(<%= name %>TableFormatter);

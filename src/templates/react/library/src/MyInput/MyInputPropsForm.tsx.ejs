@@ -1,0 +1,51 @@
+import { Checkbox, Form, FormProps, Input, Radio, Switch } from 'antd';
+import React, { memo, useCallback, useEffect } from 'react';
+
+import { MyInputPropsFormProps } from './interface';
+import { safeCallFunction } from '../utils';
+
+const MyInputPropsForm = ({ value, onChange }: MyInputPropsFormProps) => {
+  const [form] = Form.useForm();
+  const changeHandle: FormProps['onValuesChange'] = useCallback(
+    (_, values) => {
+      safeCallFunction(onChange, [
+        {
+          ...value,
+          ...values,
+        },
+      ]);
+    },
+    [onChange, value],
+  );
+  useEffect(() => {
+    form.setFieldsValue(value);
+  }, []);
+  return (
+    <Form
+      className="<%= prefix %>-my-input-props-form"
+      layout="vertical"
+      onValuesChange={changeHandle}
+      form={form}
+    >
+      <Form.Item label="占位符" name="placeholder">
+        <Input />
+      </Form.Item>
+      <Form.Item label="大小" name="size">
+        <Radio.Group>
+          <Radio.Button value="small">小</Radio.Button>
+          <Radio.Button value="middle">中</Radio.Button>
+          <Radio.Button value="large">大</Radio.Button>
+        </Radio.Group>
+      </Form.Item>
+      <Form.Item label="显示辅助信息" name="showHelper">
+        <Switch checkedChildren="显示" unCheckedChildren="隐藏"></Switch>
+      </Form.Item>
+    </Form>
+  );
+};
+
+MyInputPropsForm.defaultProps = {
+  value: {},
+};
+
+export default memo(MyInputPropsForm);

@@ -12,7 +12,7 @@ const createLibraryForm = [
     message: "选择技术框架",
     name: "framework",
     initial: "vue",
-    choices: ["vue"],
+    choices: ["vue", "react"],
   },
 ];
 createLibraryForm.validate = validator({

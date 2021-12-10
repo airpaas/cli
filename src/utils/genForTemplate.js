@@ -1,10 +1,10 @@
 const ejs = require("ejs");
 const jetpack = require("fs-jetpack");
-const { promisify } = require("util");
 const glob = require("glob");
+const path = require("path");
+const { promisify } = require("util");
 const outputFile = promisify(ejs.renderFile);
 const _ = require("lodash");
-const path = require("path");
 const config = require("../config");
 const { safeCallFunction } = require(".");
 

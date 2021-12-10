@@ -1,0 +1,55 @@
+# MyInput
+
+## 组件
+
+```tsx
+import React, { useState, useMemo } from 'react';
+import { MyInput } from '<%= name %>';
+import { Row, Col, Layout, Card, Typography, Table, Space } from 'antd';
+import ReactJson from 'react-json-view';
+
+export default () => {
+  const [props, setProps] = useState(MyInput.meta.props);
+  const [value, setValue] = useState('');
+  const data = useMemo(() => {
+    return [{ id: 1, value }];
+  }, [value]);
+  const columns = [
+    {
+      title: '数据',
+      dataIndex: 'value',
+      render: (data) => {
+        return <MyInput.TableFormatter data={data} />;
+      },
+    },
+  ];
+  return (
+    <Layout style={{ padding: 20 }}>
+      <Space direction="vertical" size={20}>
+        <Row gutter={30}>
+          <Col span={12}>
+            <Card title="组件展示">
+              <MyInput {...props} value={value} onChange={(e) => setValue(e)} />
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card title="组件属性配置表单">
+              <MyInput.PropsForm value={props} onChange={(e) => setProps(e)} />
+            </Card>
+          </Col>
+        </Row>
+        <Card title="列表中展示">
+          <Table rowKey="id" dataSource={data} columns={columns} />
+        </Card>
+        <Card title="组件元数据">
+          {MyInput.meta ? (
+            <ReactJson indentWidth={2} displayDataTypes={false} src={MyInput.meta} />
+          ) : (
+            '该组件没有元数据哟'
+          )}
+        </Card>
+      </Space>
+    </Layout>
+  );
+};
+```

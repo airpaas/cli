@@ -1,0 +1,18 @@
+import { AirPaaSComponentType, AirPaaSDataType, AirPaaSMetaData } from '../types';
+
+const MyInputMeta: AirPaaSMetaData = {
+  label: '自定义输入框',
+  dataType: AirPaaSDataType.STRING,
+  type: AirPaaSComponentType.FORM,
+  component: '<%= prefix %>-my-input',
+  propsForm: '<%= prefix %>-my-input-props-form',
+  defaultValue: '',
+  tableFormatter: '<%= prefix %>-my-input-table-formatter',
+  props: {
+    placeholder: '请输入',
+    size: 'middle',
+    showHelper: false,
+  },
+};
+
+export default MyInputMeta;

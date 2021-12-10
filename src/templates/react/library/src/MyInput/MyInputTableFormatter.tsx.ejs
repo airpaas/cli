@@ -1,0 +1,9 @@
+import React, { memo } from 'react';
+
+import { MyInputTableFormatterProps } from './interface';
+
+const MyInputTableFormatter = ({ data }: MyInputTableFormatterProps) => {
+  return <div className="<%= prefix %>-my-input-table-formatter">{data || '暂无数据'}</div>;
+};
+
+export default memo(MyInputTableFormatter);

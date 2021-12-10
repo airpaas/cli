@@ -1,0 +1,15 @@
+import './style.less';
+
+import <%= name %> from './<%= name %>';
+import <%= name %>Meta from './meta';
+import <%= name %>PropsForm from './<%= name %>PropsForm';
+import <%= name %>TableFormatter from './<%= name %>TableFormatter';
+
+// @ts-ignore
+<%= name %>.meta = <%= name %>Meta;
+// @ts-ignore
+<%= name %>.PropsForm = <%= name %>PropsForm;
+// @ts-ignore
+<%= name %>.TableFormatter = <%= name %>TableFormatter;
+
+export default <%= name %>;

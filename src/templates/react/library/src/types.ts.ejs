@@ -1,0 +1,36 @@
+export interface AirPaaSProps<T = any> {
+  value: T;
+  onChange: (value: T) => void;
+  readonly: boolean;
+  disabled: boolean;
+}
+
+export enum AirPaaSDataType {
+  STRING = 'string',
+  ARRAY = 'arrray',
+  NUMBER = 'number',
+  BOOLEAN = 'boolean',
+  OBJECT = 'object',
+}
+
+export enum AirPaaSComponentType {
+  FORM = 'form',
+  CONTAINER = 'container',
+}
+
+export interface AirPaaSMetaData<T = Record<string, any>> {
+  label: string;
+  component: string;
+  dataType: AirPaaSDataType | string;
+  propsForm: string;
+  tableFormatter: string;
+  defaultValue: string | number | boolean | object | Array<any>;
+  type: AirPaaSComponentType |  string;
+  props: T;
+}
+
+export interface AirPaaSTableFormatterProps<Value, Props> {
+  label: string;
+  data: Value;
+  formProps: Partial<Omit<Props, 'value' | 'onChange'>>;
+}

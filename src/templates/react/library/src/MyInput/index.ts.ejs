@@ -1,0 +1,15 @@
+import './style.less';
+
+import MyInput from './MyInput';
+import MyInputMeta from './meta';
+import MyInputPropsForm from './MyInputPropsForm';
+import MyInputTableFormatter from './MyInputTableFormatter';
+
+// @ts-ignore
+MyInput.meta = MyInputMeta;
+// @ts-ignore
+MyInput.PropsForm = MyInputPropsForm;
+// @ts-ignore
+MyInput.TableFormatter = MyInputTableFormatter;
+
+export default MyInput;

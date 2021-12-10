@@ -13,7 +13,9 @@ class PkgHelper {
   get json() {
     return require(this.pkgPath);
   }
-
+  isExist() {
+    return jetpack.exists(this.pkgPath);
+  }
   update(value = {}) {
     const data = _.merge(this.json, value);
     jetpack.write(this.pkgPath, JSON.stringify(data, null, 2));

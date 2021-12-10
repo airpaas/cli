@@ -1,0 +1,32 @@
+export default {
+  extractCSS: true,
+  // airpaas 需将组件库打包为umd
+  umd: {
+    // 如需自己项目中使用，将name、file字段改为自己想要的名字即可
+    name: '<%= code %>',
+    file: '<%= code %>',
+    minFile: true,
+    globals: {
+      react: 'React',
+      'react-dom': 'ReactDom',
+      antd: 'antd',
+    },
+  },
+  extraExternals: ['react', 'react-dom', 'antd'],
+  // 打包成自己的组件库解开下面的注释，将 umd的注释 和 extraExternals注释掉即可
+  // extraBabelPlugins: [
+  //   [
+  //     'babel-plugin-import',
+  //     {
+  //       libraryName: 'antd',
+  //       libraryDirectory: 'es',
+  //       style: true,
+  //     },
+  //   ],
+  // ],
+  // esm: {
+  //   type: 'babel',
+  //   importLibToEs: true,
+  // },
+  // cjs: 'babel',
+};

@@ -1,0 +1,13 @@
+import { AirPaaSProps } from '../types';
+import { AirPaaSTableFormatterProps } from './../types';
+import { InputProps } from 'antd';
+
+export type <%= name %>Value = string;
+export type <%= name %>PropsFormProps = AirPaaSProps;
+export type <%= name %>Props = Partial<
+  AirPaaSProps<<%= name %>Value> & Omit<InputProps, 'value' | 'onChange'>
+> & {
+  showHelper: boolean;
+};
+
+export type <%= name %>TableFormatterProps = AirPaaSTableFormatterProps<<%= name %>Value, <%= name %>Props>;

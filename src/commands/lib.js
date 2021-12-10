@@ -6,6 +6,7 @@ const {
   catchErrorWrap,
   throwErr,
   strategyFunctionCreactor,
+  strategyValueCreactor,
 } = require("../utils");
 const { prompt } = require("enquirer");
 const createLibraryForm = require("../forms/createLibrary");
@@ -23,11 +24,27 @@ const { getOssSts, saveLibInfo } = require("../service/metaData.service");
 const { Client } = require("minio");
 const fs = require("fs");
 const ProgressBar = require("progress");
+const changeCase = require("change-case");
+const genForSingleFile = require("../utils/genForSingleFile");
 class LibCommand extends Command {
   static args = [{ name: "mode" }];
   async collectLibInfo() {
     const anwser = await prompt(createLibraryForm);
     await createLibraryForm.validate(anwser);
+    const defalutPrefix = changeCase
+      .paramCase(anwser.name)
+      .split("-")
+      .map((item) => {
+        return item.charAt(0);
+      })
+      .join("");
+    const prefixAnwer = await prompt({
+      type: "input",
+      message: "组件库的前缀，默认是名称的首字母小写",
+      name: "prefix",
+      initial: defalutPrefix,
+    });
+    anwser.prefix = prefixAnwer.prefix;
     anwser.code = nanoid();
     return anwser;
   }
@@ -104,12 +121,16 @@ class LibCommand extends Command {
       const libRootPath = path.join(process.cwd());
       const pkgHelper = PkgHelper.of({ root: libRootPath });
       const { air, version } = pkgHelper.json;
+
       // 检查有无配置信息
       if (_.isNil(air))
         throwErr(`未发现组件库配置信息，请使用命令 'air lib new' 配置信息`);
       await createLibraryForm.validate(air);
+      const libDistPath = strategyValueCreactor({
+        vue: path.join(libRootPath, "lib"),
+        react: path.join(libRootPath, "dist"),
+      })(air.framework);
       // 检查有无打包
-      const libDistPath = path.join(libRootPath, "lib");
       if (!jetpack.exists(libDistPath))
         throwErr(`组件库尚未打包，请先执行 'npm run build-lib'`);
       // 输入版本号
@@ -124,7 +145,6 @@ class LibCommand extends Command {
         throwErr("版本号格式不正确，格式例子：1.0.0、0.0.1");
       }
       pkgHelper.update({ version: versionAnwser.version });
-
       // 检查账号信息
       checkAuthentication();
       // 执行登录
@@ -155,16 +175,16 @@ class LibCommand extends Command {
             getUploadTaskList(localFilePath, arr);
           } else {
             const target = `${air.code}/${pkgHelper.json.version}/${file}`;
-            const mainFile = [
-              `${air.code}.umd.min.js`,
-              `${air.code}.css`,
-            ].includes(file);
-
+            const mainFile = strategyValueCreactor({
+              vue: [`${air.code}.umd.min.js`, `${air.code}.css`],
+              react: [`${air.code}.umd.min.js`, `${air.code}.umd.min.css`],
+            })(air.framework);
+            const isMainFile = mainFile.includes(file);
             arr.push({
               local: localFilePath,
               target,
               requestBody: {
-                mainFile,
+                mainFile: isMainFile,
                 type: extname === "js" ? "script" : "style",
                 url: `//${endPoint}:9000/${target}`,
               },
@@ -197,19 +217,29 @@ class LibCommand extends Command {
   }
 
   async genLibInfoCode() {
-    const buildLibCommandExecutor = strategyFunctionCreactor({
-      vue: (code) =>
-        `vue-cli-service build --target lib --name ${code} --dest lib packages/index.js`,
-    });
     catchErrorWrap(async () => {
       const libRootPath = path.join(process.cwd());
       const anwser = await this.collectLibInfo();
-      PkgHelper.of({ root: libRootPath }).update({
+      const ph = PkgHelper.of({ root: libRootPath });
+      ph.update({
         air: anwser,
-        scripts: {
-          "build-lib": buildLibCommandExecutor(anwser.framework, anwser.code),
-        },
       });
+      await strategyFunctionCreactor({
+        vue: () => {
+          ph.update({
+            scripts: {
+              "build-lib": `vue-cli-service build --target lib --name ${anwser.code} --dest lib packages/index.js`,
+            },
+          });
+        },
+        react: async () => {
+          await genForSingleFile(
+            "fatherrc.ejs",
+            path.join(libRootPath, ".fatherrc.ts"),
+            anwser
+          );
+        },
+      })(anwser.framework);
       logger.success("配置组件库信息成功");
       logger.success(`组件库code： ${anwser.code}`);
     });

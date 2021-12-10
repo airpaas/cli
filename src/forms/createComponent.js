@@ -10,6 +10,13 @@ const creaateComponentForm = [
   { type: "input", name: "title", message: "组件标题" },
   {
     type: "select",
+    name: "type",
+    message: "组件类型(form: 表单组件)",
+    initial: "form",
+    choices: ["form"],
+  },
+  {
+    type: "select",
     message: "组件产出的数据类型",
     name: "dataType",
     initial: "string",

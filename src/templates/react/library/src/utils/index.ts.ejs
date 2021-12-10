@@ -1,0 +1,8 @@
+export const safeCallFunction = (
+  fn: Function | null | undefined,
+  args: any[] = [],
+  defaultReturn?: any,
+) => {
+  if (fn) return fn(...args);
+  return defaultReturn;
+};

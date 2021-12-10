@@ -1,0 +1,14 @@
+import { AirPaaSComponentType, AirPaaSDataType, AirPaaSMetaData } from '../types';
+
+const <% name %>Meta: AirPaaSMetaData = {
+  label: '自定义输入框',
+  dataType: AirPaaSDataType.<%= dataType.toUpperCase() %>,
+  type: AirPaaSComponentType.<%= type.toUpperCase() %>,
+  component: '<%= prefix %>-<%= componentName %>',
+  propsForm: '<%= prefix %>-<%= componentName %>-props-form',
+  defaultValue: '',
+  tableFormatter: '<%= prefix %>-<%= componentName %>-table-formatter',
+  props: {},
+};
+
+export default <% name %>Meta;

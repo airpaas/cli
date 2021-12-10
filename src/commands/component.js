@@ -13,6 +13,7 @@ const jetpack = require("fs-jetpack");
 const genForTemplate = require("../utils/genForTemplate");
 const createLibraryForm = require("../forms/createLibrary");
 const updatePckageMainFileExecutor = require("../utils/updatePckageMainFileExecutor");
+const PkgHelper = require("../utils/pkgHelper");
 const defaultValueExecutor = strategyValueCreactor(
   {
     string: `''`,
@@ -67,10 +68,30 @@ class ComponentCommand extends Command {
   async create() {
     try {
       const anwser = await this.processArgs();
-      // 执行生成模板
-      const packageFolderPath = path.join(process.cwd(), "packages");
-      const destFolder = path.join(packageFolderPath, anwser.name);
       const framework = await this.getFramework();
+      const libraryRoot = path.join(process.cwd());
+      // 执行生成模板
+      const packageFolderPath = strategyValueCreactor({
+        vue: path.join(libraryRoot, "packages"),
+        react: path.join(libraryRoot, "src"),
+      })(framework);
+      const destFolder = path.join(packageFolderPath, anwser.name);
+      const pkgHelper = PkgHelper.of(libraryRoot);
+      if (!pkgHelper.isExist()) {
+        throw new Error("未读取到组件库配置，请在组件库根目录执行");
+      }
+      const { air } = pkgHelper.json;
+      if (!air) {
+        throw new Error(
+          "未发现组件库配置信息，请使用命令 'air lib new' 配置信息"
+        );
+      }
+      if (!air.prefix) {
+        throw new Error("没有设置前缀，请检查 package.json 的 air.prefix 配置");
+      }
+      anwser.prefix = air.prefix;
+      anwser.libraryRoot = libraryRoot;
+      anwser.libraryName = air.name;
       const gen = async () => {
         await genForTemplate(
           {
@@ -97,7 +118,7 @@ class ComponentCommand extends Command {
         await gen();
       }
       logger.info("组件创建完成");
-      await updatePckageMainFileExecutor(framework, packageFolderPath);
+      await updatePckageMainFileExecutor(framework, packageFolderPath, anwser);
       logger.info("更新组件包主文件成功");
       // 检查有无该组件
     } catch (error) {

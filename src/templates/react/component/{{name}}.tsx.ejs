@@ -1,0 +1,25 @@
+import React, { ChangeEventHandler, memo, useCallback } from 'react';
+
+import { Input } from 'antd';
+import { <%= name %>Props } from './interface';
+import { safeCallFunction } from '../utils';
+
+const <%= name %> = ({ value, onChange, showHelper, ...props }: <%= name %>Props) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => safeCallFunction(onChange, [
+
+    ]),
+    [onChange],
+  );
+  return (
+    <div className="<%= prefix %>-<%= componentName %>">
+
+    </div>
+  );
+};
+
+<%= name %>.defaultProps = {
+  showHelper: false,
+};
+
+export default memo(<%= name %>);

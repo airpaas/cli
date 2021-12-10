@@ -1,0 +1,26 @@
+import React, { ChangeEventHandler, memo, useCallback } from 'react';
+
+import { Input } from 'antd';
+import { MyInputProps } from './interface';
+import { safeCallFunction } from '../utils';
+
+const MyInput = ({ value, onChange, showHelper, ...props }: MyInputProps) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => safeCallFunction(onChange, [e.target.value]),
+    [onChange],
+  );
+  return (
+    <div className="<%= prefix %>-my-input">
+      <div className="<%= prefix %>-my-input-ctrl">
+        <Input value={value} onChange={handleChange} {...props} />
+      </div>
+      {showHelper && <div className="<%= prefix %>-my-input-value">输入的数据：{value || '暂无数据'}</div>}
+    </div>
+  );
+};
+
+MyInput.defaultProps = {
+  showHelper: false,
+};
+
+export default memo(MyInput);
