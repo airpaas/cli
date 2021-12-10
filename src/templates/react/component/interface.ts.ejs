@@ -8,7 +8,7 @@ export type <%= name %>Value = string;
 export type <%= name %>Props = Partial<
   AirPaaSProps<<%= name %>Value> & Omit<InputProps, 'value' | 'onChange'>
 > & {
-  showHelper: boolean;
+  // 在这里定义组件的props
 };
 
 export type <%= name %>PropsFormProps = AirPaaSPropsFormProps<
