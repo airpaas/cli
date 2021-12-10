@@ -1,6 +1,6 @@
 const request = require("../utils/request");
-const IAM_SSO_SERVER = "/deepexi-staff-iam-sso";
-const IAM_ADMIN_SERVER = "/deepexi-staff-iam-admin";
+const IAM_SSO_SERVER = "/staff-iam-sso";
+const IAM_ADMIN_SERVER = "/staff-iam-admin";
 const qs = require("qs");
 const { db } = require("../db");
 const login = (data) => {
@@ -8,10 +8,10 @@ const login = (data) => {
     .post(
       `${IAM_SSO_SERVER}/oauth/token`,
       qs.stringify({
-        grant_type: "deepexi",
-        enterpriseCode: "deepexi",
+        grant_type: "airpaas",
+        enterpriseCode: "airpaas",
         scope: "all",
-        client_id: "deepexi",
+        client_id: "airpaas",
         client_secret: "123456",
         ...data,
       })
