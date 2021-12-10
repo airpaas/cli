@@ -1,16 +1,16 @@
 <template>
-  <div class="air-input-formatter">
+  <div class="<%= prefix %>-input-table-formatter">
     {{ data }}
   </div>
 </template>
 
 <script>
   export default {
-    name: 'air-input-formatter',
+    name: '<%= prefix %>-input-table-formatter',
     props: {
       data: {
         type: String,
-        default: () => []
+        default: ''
       },
       label: {
         type: String,
@@ -19,9 +19,13 @@
       formProps: {
         type: Object,
         default: () => {
-          return {
-            columns: []
-          }
+          return {}
+        }
+      },
+      rowData: {
+        type: Object,
+        default: () => {
+          return {}
         }
       }
     },
@@ -30,6 +34,6 @@
 </script>
 
 <style lang="less">
-  .air-input-formatter {}
+  .<%= prefix %>-input-table-formatter {}
 
 </style>

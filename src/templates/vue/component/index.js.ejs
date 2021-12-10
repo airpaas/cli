@@ -1,12 +1,15 @@
 import <%= name %> from './<%= name %>.vue'
-import <%= name %>Formatter from './<%= name %>Formatter.vue'
+import <%= name %>TableFormatter from './<%= name %>TableFormatter.vue'
 import <%= name %>PropsForm from './<%= name %>PropsForm.vue'
 import meta from './meta'
 
 <%= name %>.install = (Vue) => {
   Vue.component(<%= name %>.name , <%= name %>)
   Vue.component(<%= name %>PropsForm.name , <%= name %>PropsForm)
-  Vue.component(<%= name %>Formatter.name , <%= name %>Formatter)
+  Vue.component(<%= name %>TableFormatter.name , <%= name %>TableFormatter)
 }
 <%= name %>.meta = meta
+<%= name %>.PropsForm = <%= name %>PropsForm
+<%= name %>.TableFormatter = <%= name %>TableFormatter
+
 export default <%= name %>

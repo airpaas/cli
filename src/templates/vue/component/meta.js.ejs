@@ -1,13 +1,15 @@
 export default {
   label: '<%= title %>',
   // 组件
-  component: '<%= componentName %>',
+  component: '<%= prefix %>-<%= componentName %>',
   // 组件配置表单
-  propsForm: '<%= componentName %>-props-form',
+  propsForm: '<%= prefix %>-<%= componentName %>-props-form',
   // 组件在表格中的展示
-  tableFormatter: '<%= componentName %>-formatter',
+  tableFormatter: '<%= prefix %>-<%= componentName %>-table-formatter',
   // 组件在列表中的展示
   dataType: '<%= dataType %>',
+  // 组件类型
+  type: '<%= type %>',
   // 组件默认值
   defaultValue: <%- dataTypeDefaultValue %>,
   // 组件props

@@ -1,12 +1,12 @@
 <template>
-  <div class="<%= componentName %>-formatter">
+  <div class="<%= prefix %>-<%= componentName %>-table-formatter">
     {{ data }}
   </div>
 </template>
 
 <script>
   export default {
-    name: '<%= componentName %>-formatter',
+    name: '<%= prefix %>-<%= componentName %>-table-formatter',
     props: {
       data: {
         type: <%= dataTypeU %>,
@@ -19,7 +19,13 @@
       formProps: {
         type: Object,
         default: () => {
-          return { }
+          return {}
+        }
+      },
+      rowData: {
+        type: Object,
+        default: () => {
+          return {}
         }
       }
     },
@@ -28,5 +34,5 @@
 </script>
 
 <style lang="less">
-  .<%=componentName %>-formatter {}
+  .<%= prefix %>-<%= componentName %>-table-formatter {}
 </style>

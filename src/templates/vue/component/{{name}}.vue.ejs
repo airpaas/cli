@@ -1,5 +1,5 @@
 <template>
-  <div class="<%= componentName %>">
+  <div class="<%= prefix %>-<%= componentName %>">
     {{data}}
   </div>
 </template>
@@ -14,13 +14,13 @@
         default: <%- dataTypeDefaultValueU %>
       }
     },
-    name: '<%= componentName %>',
+    name: '<%= prefix %>-<%= componentName %>',
     mixins: [formCtrlMixin, customVModel],
   }
 
 </script>
 
 <style lang="less">
-  .<%= componentName %> {}
+  .<%= prefix %>-<%= componentName %> {}
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="air-input">
+  <div class="<%= prefix %>-input">
     <el-input
       v-model="data"
       :disabled="disabled"
@@ -18,13 +18,13 @@
         default: ''
       }
     },
-    name: 'air-input',
+    name: '<%= prefix %>-input',
     mixins: [formCtrlMixin, customVModel],
   }
 
 </script>
 
 <style lang="less">
-  .air-input {}
+  .<%= prefix %>-input {}
 
 </style>

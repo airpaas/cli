@@ -1,5 +1,5 @@
 <template>
-  <el-form class="<%= componentName %>-props-form" :model="data" ref="form">
+  <el-form class="<%= prefix %>-<%= componentName %>-props-form" :model="data" ref="form">
     {{data}}
   </el-form>
 </template>
@@ -9,13 +9,19 @@
   import customVModel from '../mixins/customVModel'
   import propsFormMixin from '../mixins/propsFrom'
   export default {
-    name: '<%= componentName %>-props-form',
+    name: '<%= prefix %>-<%= componentName %>-props-form',
+    props: {
+      fields: {
+        type: Array,
+        default: ()=> []
+      }
+    },
     mixins: [formCtrlMixin, customVModel, propsFormMixin]
   }
 
 </script>
 
 <style lang="less">
-  .<%= componentName %>-props-form {}
+  .<%= prefix %>-<%= componentName %>-props-form {}
 
 </style>
