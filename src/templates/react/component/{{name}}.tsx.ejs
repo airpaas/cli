@@ -4,7 +4,7 @@ import { Input } from 'antd';
 import { <%= name %>Props } from './interface';
 import { safeCallFunction } from '../utils';
 
-const <%= name %> = ({ value, onChange, showHelper, ...props }: <%= name %>Props) => {
+const <%= name %> = ({ value, onChange, ...props }: <%= name %>Props) => {
   const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => safeCallFunction(onChange, [
 
@@ -19,7 +19,7 @@ const <%= name %> = ({ value, onChange, showHelper, ...props }: <%= name %>Props
 };
 
 <%= name %>.defaultProps = {
-  showHelper: false,
+
 };
 
 export default memo(<%= name %>);
