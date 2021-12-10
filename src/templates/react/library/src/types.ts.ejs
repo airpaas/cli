@@ -18,6 +18,12 @@ export enum AirPaaSComponentType {
   CONTAINER = 'container',
 }
 
+export interface AirPaaSPropsFormProps<T = Record<string, any>> {
+  fields: any[];
+  value: T;
+  onChange: (value: T) => void;
+}
+
 export interface AirPaaSMetaData<T = Record<string, any>> {
   label: string;
   component: string;
@@ -25,12 +31,16 @@ export interface AirPaaSMetaData<T = Record<string, any>> {
   propsForm: string;
   tableFormatter: string;
   defaultValue: string | number | boolean | object | Array<any>;
-  type: AirPaaSComponentType |  string;
+  type: AirPaaSComponentType | string;
   props: T;
 }
 
 export interface AirPaaSTableFormatterProps<Value, Props> {
   label: string;
+  // 当前控件的数据
   data: Value;
+  // 当前控件的props配置
   formProps: Partial<Omit<Props, 'value' | 'onChange'>>;
+  // 列表中的行数据
+  rowData: Record<string, any>;
 }

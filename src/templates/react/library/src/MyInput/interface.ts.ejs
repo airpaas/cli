@@ -1,13 +1,18 @@
+import { AirPaaSPropsFormProps, AirPaaSTableFormatterProps } from './../types';
+
 import { AirPaaSProps } from '../types';
-import { AirPaaSTableFormatterProps } from './../types';
 import { InputProps } from 'antd';
 
 export type MyInputValue = string;
-export type MyInputPropsFormProps = AirPaaSProps;
+
 export type MyInputProps = Partial<
   AirPaaSProps<MyInputValue> & Omit<InputProps, 'value' | 'onChange'>
 > & {
   showHelper: boolean;
 };
+
+export type MyInputPropsFormProps = AirPaaSPropsFormProps<
+  Exclude<MyInputProps, 'value' | 'onChange' | 'readonly' | 'disabled'>
+>;
 
 export type MyInputTableFormatterProps = AirPaaSTableFormatterProps<MyInputValue, MyInputProps>;
