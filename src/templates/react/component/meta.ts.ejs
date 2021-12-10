@@ -6,7 +6,7 @@ const <% name %>Meta: AirPaaSMetaData = {
   type: AirPaaSComponentType.<%= type.toUpperCase() %>,
   component: '<%= prefix %>-<%= componentName %>',
   propsForm: '<%= prefix %>-<%= componentName %>-props-form',
-  defaultValue: '',
+  defaultValue: <%- dataTypeDefaultValue %>,
   tableFormatter: '<%= prefix %>-<%= componentName %>-table-formatter',
   props: {},
 };

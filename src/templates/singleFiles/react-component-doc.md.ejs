@@ -14,15 +14,24 @@ export default () => {
   const data = useMemo(() => {
     return [{ id: 1, value }];
   }, [value]);
-  const columns = [
-    {
-      title: '数据',
-      dataIndex: 'value',
-      render: (data) => {
-        return <<%= name %>.TableFormatter data={data} />;
+  const columns = useMemo(()=>{
+    return [
+      {
+        title: '数据',
+        dataIndex: 'value',
+        render: (data, rowData) => {
+          return (
+            <<%= name %>.TableFormatter
+              rowData={rowData}
+              formProps={props}
+              label="数据"
+              data={data}
+            />
+          );
+        },
       },
-    },
-  ];
+    ]
+  },[props]);
   return (
     <Layout style={{ padding: 20 }}>
       <Space direction="vertical" size={20}>

@@ -2,8 +2,12 @@ import React, { memo } from 'react';
 
 import { <%= name %>TableFormatterProps } from './interface';
 
-const <%= name %>TableFormatter = ({ data }: <%= name %>TableFormatterProps) => {
-  return <div className="<%= prefix %>-<%= componentName %>-table-formatter">{data || '暂无数据'}</div>;
+const <%= name %>TableFormatter = ({ data, formProps, rowData, label }: <%= name %>TableFormatterProps) => {
+  return <div className="<%= prefix %>-<%= componentName %>-table-formatter">{JSON.stringify(data, null, 2) || '暂无数据'}</div>;
 };
+
+<%= name %>TableFormatter.defaultProps = {
+
+}
 
 export default memo(<%= name %>TableFormatter);

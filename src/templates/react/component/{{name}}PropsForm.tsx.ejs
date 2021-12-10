@@ -4,7 +4,7 @@ import React, { memo, useCallback, useEffect } from 'react';
 import { <%= name %>PropsFormProps } from './interface';
 import { safeCallFunction } from '../utils';
 
-const <%= name %>PropsForm = ({ value, onChange }: <%= name %>PropsFormProps) => {
+const <%= name %>PropsForm = ({ value, onChange, fields }: <%= name %>PropsFormProps) => {
   const [form] = Form.useForm();
   const changeHandle: FormProps['onValuesChange'] = useCallback(
     (_, values) => {
@@ -34,6 +34,7 @@ const <%= name %>PropsForm = ({ value, onChange }: <%= name %>PropsFormProps) =>
 
 <%= name %>PropsForm.defaultProps = {
   value: {},
+  fields: []
 };
 
 export default memo(<%= name %>PropsForm);
