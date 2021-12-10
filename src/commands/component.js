@@ -31,6 +31,14 @@ const complexDataTypeExecutor = strategyFunctionCreactor({
   object: () => `()=>({})`,
 });
 
+const tsTypeExecutor = strategyValueCreactor({
+  string: "string",
+  number: "number",
+  boolean: "boolean",
+  array: "Array<any>",
+  object: "Record<string, any> | {}",
+});
+
 class ComponentCommand extends Command {
   static args = [
     {
@@ -62,6 +70,7 @@ class ComponentCommand extends Command {
       : dataTypeDefaultValue;
     anwser.name = changeCase.pascalCase(anwser.name);
     anwser.componentName = changeCase.paramCase(anwser.name);
+    anwser.valueTsType = tsTypeExecutor(anwser.dataType);
     return anwser;
   }
 
@@ -92,6 +101,7 @@ class ComponentCommand extends Command {
       anwser.prefix = air.prefix;
       anwser.libraryRoot = libraryRoot;
       anwser.libraryName = air.name;
+
       const gen = async () => {
         await genForTemplate(
           {

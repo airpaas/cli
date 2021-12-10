@@ -4,7 +4,19 @@ const { strategyFunctionCreactor, logger } = require(".");
 const genForSingleFile = require("./genForSingleFile");
 
 const getComponentFolders = (packagesPath) => {
-  const excludes = ["utils", "mixins", "styles", ".umi"];
+  const excludes = [
+    "utils",
+    "mixins",
+    "styles",
+    ".umi",
+    "service",
+    "api",
+    "helpers",
+    "lib",
+    "core",
+    "components",
+    "containers",
+  ];
   return fs
     .readdirSync(packagesPath, "utf-8")
     .filter((item) => {

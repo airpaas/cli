@@ -7,6 +7,7 @@ const {
   throwErr,
   strategyFunctionCreactor,
   strategyValueCreactor,
+  validator,
 } = require("../utils");
 const { prompt } = require("enquirer");
 const createLibraryForm = require("../forms/createLibrary");
@@ -44,7 +45,19 @@ class LibCommand extends Command {
       name: "prefix",
       initial: defalutPrefix,
     });
+    await validator({
+      prefix: [
+        { required: true, message: "组件库的前缀不能为空" },
+        {
+          type: "string",
+          min: 1,
+          max: 10,
+          message: "组件库的前缀长度为1-10个字符",
+        },
+      ],
+    })(prefixAnwer);
     anwser.prefix = prefixAnwer.prefix;
+
     anwser.code = nanoid();
     return anwser;
   }

@@ -2,7 +2,7 @@ import { AirPaaSPropsFormProps, AirPaaSTableFormatterProps } from './../types';
 
 import { AirPaaSProps } from '../types';
 
-export type <%= name %>Value = string;
+export type <%= name %>Value = <%- valueTsType %>;
 
 export type <%= name %>Props = Partial<AirPaaSProps<<%= name %>Value>> & {
   // 在这里定义组件的props
