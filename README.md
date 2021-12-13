@@ -6,7 +6,7 @@ $ npm install -g @airpaas/cli
 $ air COMMAND
 running command...
 $ air (-v|--version|version)
-@airpaas/cli/0.2.10 darwin-x64 node-v16.13.1
+@airpaas/cli/0.2.11 darwin-x64 node-v16.13.1
 $ air --help [COMMAND]
 USAGE
   $ air COMMAND
@@ -31,7 +31,7 @@ USAGE
   $ air component OPERATION
 ```
 
-_See code: [src/commands/component.js](https://github.com/airpaas/cli/blob/v0.2.10/src/commands/component.js)_
+_See code: [src/commands/component.js](https://github.com/airpaas/cli/blob/v0.2.11/src/commands/component.js)_
 
 ## `air config [KEY] [VALUE]`
 
@@ -42,7 +42,7 @@ USAGE
   $ air config [KEY] [VALUE]
 ```
 
-_See code: [src/commands/config.js](https://github.com/airpaas/cli/blob/v0.2.10/src/commands/config.js)_
+_See code: [src/commands/config.js](https://github.com/airpaas/cli/blob/v0.2.11/src/commands/config.js)_
 
 ## `air help [COMMAND]`
 
@@ -70,5 +70,5 @@ USAGE
   $ air lib [MODE]
 ```
 
-_See code: [src/commands/lib.js](https://github.com/airpaas/cli/blob/v0.2.10/src/commands/lib.js)_
+_See code: [src/commands/lib.js](https://github.com/airpaas/cli/blob/v0.2.11/src/commands/lib.js)_
 <!-- commandsstop -->

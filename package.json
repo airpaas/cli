@@ -1,7 +1,7 @@
 {
   "name": "@airpaas/cli",
   "description": "AirPaaS 开发者工具",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "author": "AirPaaS",
   "bin": {
     "air": "./bin/run"
