@@ -192,6 +192,7 @@ class LibCommand extends Command {
               vue: [`${air.code}.umd.min.js`, `${air.code}.css`],
               react: [`${air.code}.umd.min.js`, `${air.code}.umd.min.css`],
             })(air.framework);
+
             const isMainFile = mainFile.includes(file);
             arr.push({
               local: localFilePath,
@@ -224,6 +225,7 @@ class LibCommand extends Command {
         componentUrlList: uploadTaskList.map((item) => item.requestBody),
       };
       // 更新服务器数据
+
       await saveLibInfo(requestBody);
       logger.success("组件库发布成功！");
     });
