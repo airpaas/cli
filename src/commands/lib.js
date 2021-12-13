@@ -199,7 +199,7 @@ class LibCommand extends Command {
               requestBody: {
                 mainFile: isMainFile,
                 type: extname === "js" ? "script" : "style",
-                url: `//${endPoint}:9000/${target}`,
+                url: `http://${endPoint}:9000/libs/${target}`,
               },
             });
           }
