@@ -1,3 +1,25 @@
 <% components.forEach(name =>{ %>
-  export { default as <%= name %> } from './<%= name %>';
+import <%= name %> from './<%= name %>';
 <% }) %>
+
+const components: Record<string, any> = {
+<% components.forEach(name =>{ %>
+  <%= name %>,
+<% }) %>
+};
+
+const metas = Object.keys(components).reduce((acc, item) => {
+  const component = components[item];
+  if (component) {
+    //@ts-ignore
+    acc.push(component.meta);
+  }
+  return acc;
+}, []);
+
+export {
+<% components.forEach(name =>{ %>
+  <%= name %>,
+<% }) %>
+  metas
+};
